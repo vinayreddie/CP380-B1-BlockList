@@ -18,7 +18,7 @@ namespace CP380_B1_BlockList.Models
         public void MakeFirstBlock()
         {
             var block = new Block(DateTime.Now, null, new List<Payload>());
-            block.Mine();
+            block.Mine(Difficulty);
             Chain.Add(block);
         }
 
