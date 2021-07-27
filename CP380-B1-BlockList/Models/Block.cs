@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CP380_B1_BlockList.Models
 {
@@ -40,7 +41,7 @@ namespace CP380_B1_BlockList.Models
             var inputBytes = Encoding.ASCII.GetBytes(inputString);
             var outputBytes = sha256.ComputeHash(inputBytes);
 
-            return Convert.ToBase64String(outputBytes);
+            return Base64UrlEncoder.Encode(outputBytes);
         }
 
         public void Mine(int difficulty)
