@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
@@ -32,21 +32,26 @@ namespace CP380_B1_BlockList.Models
         {
             var sha256 = SHA256.Create();
             var json = JsonSerializer.Serialize(Data);
-
-            //
             // TODO
-            //
-            var inputString = $""; // TODO
-
-            var inputBytes = Encoding.ASCII.GetBytes(inputString);
+            
+            var inputBytes = Encoding.ASCII.GetBytes($"{TimeStamp.Date:yyyy-MM-dd hh:mm:ss tt}-{PreviousHash}-{Nonce}-{json}");
             var outputBytes = sha256.ComputeHash(inputBytes);
-
+           
             return Base64UrlEncoder.Encode(outputBytes);
         }
 
         public void Mine(int difficulty)
         {
             // TODO
+            string c = new('C', difficulty);
+
+            while (Hash.Substring(0,difficulty)!= c)
+            {
+                Nonce++;
+                Hash = CalculateHash();
+             
+             
+            }
         }
     }
 }
